@@ -1,6 +1,7 @@
 package com.nprmanbrandons11.smartweather.domain.use_case
 
 
+import android.util.Log
 import com.nprmanbrandons11.smartweather.data.models.response.WeatherResponse
 import com.nprmanbrandons11.smartweather.domain.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
@@ -14,5 +15,6 @@ class WeatherUsesCases {
         emit(repository.getWeather(latitude,longitude))
     }.catch { e ->
         e.printStackTrace()
+        Log.d("WEATHER",e.toString())
         }
 }

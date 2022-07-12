@@ -27,7 +27,7 @@ class RvHomeAdapter(private val list: List<WheatherInfo>): RecyclerView.Adapter<
 
         fun bindCard(info: WheatherInfo){
                 binding.weather.text = info.wheather
-                binding.day.text = info.day.toString()
+                binding.day.text = "Day" + info.day.toString()
                 binding.cardView.setOnClickListener {
                     Navigation.findNavController(parent).navigate(R.id.action_homeFragment_to_detailFragment)
                 }
