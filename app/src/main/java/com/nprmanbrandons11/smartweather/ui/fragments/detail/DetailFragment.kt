@@ -33,6 +33,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.date.text = info?.date?.subSequence(0,10)
+        binding.weather.text = info?.wheather
         binding.tempMax.text = info?.max_temp.toString() + "°F"
         binding.minTemp.text = info?.min_temp.toString() + "°F"
         binding.humudity.text = info?.humidity.toString()
