@@ -80,6 +80,19 @@ class HomeFragment : Fragment() {
 
                 }
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    if (ActivityCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        fusedLocationClient.lastLocation
+                            .addOnSuccessListener { location : Location? ->
+                                if(location?.latitude !=null)
+                                    checkNetwork(location.latitude.toInt(),location.longitude.toInt())
+                                else
+                                    Toast.makeText(requireContext(),"We cant find your location",Toast.LENGTH_SHORT).show()
+                            }
+                    }
 
                 } else -> {
                 Toast.makeText(requireContext(),"You need to accept gps permissions to continue",Toast.LENGTH_SHORT).show()
@@ -100,10 +113,6 @@ class HomeFragment : Fragment() {
                     else
                         Toast.makeText(requireContext(),"We cant find your location",Toast.LENGTH_SHORT).show()
                 }
-
-        }
-        else{
-            Toast.makeText(requireContext(),"You need to accept gps permissions to continue",Toast.LENGTH_SHORT).show()
         }
     }
 
