@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         val lottieView = binding.animation
         lottieView.enableMergePathsForKitKatAndAbove(true)
         lottieView.setAnimation(R.raw.splash_lootie)
-        lottieView.repeatCount = 1
+
 
         lottieView.playAnimation()
 
