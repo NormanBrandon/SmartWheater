@@ -32,9 +32,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = RvHomeAdapter(listOf(WheatherInfo(1,"lluvioso"),WheatherInfo(2,"nublado")))
-        binding.rvHome.layoutManager = LinearLayoutManager(requireContext(),VERTICAL, false)
-        binding.rvHome.adapter = adapter
+        viewModel.getWeather(35, 139)
+        viewModel.response.observe(viewLifecycleOwner){
+            adapter = RvHomeAdapter(it)
+            binding.rvHome.layoutManager = LinearLayoutManager(requireContext(),VERTICAL, false)
+            binding.rvHome.adapter = adapter
+
+        }
 
     }
 
