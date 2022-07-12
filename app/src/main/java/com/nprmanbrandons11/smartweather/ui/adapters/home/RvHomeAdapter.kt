@@ -1,5 +1,6 @@
 package com.nprmanbrandons11.smartweather.ui.adapters.home
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -26,10 +27,12 @@ class RvHomeAdapter(private val list: List<WheatherInfo>): RecyclerView.Adapter<
     inner class CardViewHolder(private val binding: ItemCardHomeBinding, private val parent: ViewGroup):RecyclerView.ViewHolder(binding.root) {
 
         fun bindCard(info: WheatherInfo){
-                binding.weather.text = info.wheather
-                binding.day.text = "Day" + info.day.toString()
+                binding.weather.text = info.weather_desc
+                binding.day.text = info.date?.subSequence(11,16)
                 binding.cardView.setOnClickListener {
-                    Navigation.findNavController(parent).navigate(R.id.action_homeFragment_to_detailFragment)
+                    val bundle = Bundle()
+                    bundle.putParcelable("weatherInfo",info)
+                    Navigation.findNavController(parent).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
                 }
         }
 

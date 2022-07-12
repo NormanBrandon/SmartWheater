@@ -21,7 +21,16 @@ class HomeViewModel: ViewModel() {
             if(result?.cod == "200"){
                 val list: MutableList<WheatherInfo> = mutableListOf()
                 for (i in 0 .. 6){
-                    list.add(WheatherInfo(i+1,result.list[i].weather[0].main))
+                    list.add(
+                        WheatherInfo(
+                            i+1,
+                            result.list[i].weather[0].main,
+                            result.list[i].weather[0].description,
+                            result.list[i].dt_txt,
+                            result.list[i].main.temp_max,
+                            result.list[i].main.temp_min,
+                            result.list[i].main.humidity
+                        ))
                 }
                 _response.postValue(list)
             }
