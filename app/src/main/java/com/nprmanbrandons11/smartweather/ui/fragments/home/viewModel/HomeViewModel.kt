@@ -6,16 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nprmanbrandons11.smartweather.data.models.WheatherInfo
+import com.nprmanbrandons11.smartweather.data.models.response.WeatherResponse
 import com.nprmanbrandons11.smartweather.domain.use_case.WeatherUsesCases
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 
-class HomeViewModel: ViewModel() {
-    private var weatherUsesCases = WeatherUsesCases()
-    private val _response = MutableLiveData<List<WheatherInfo>>(listOf())
-    val response : LiveData<List<WheatherInfo>> = _response
+class HomeViewModel(
+    private val weatherUsesCases:WeatherUsesCases = WeatherUsesCases()
+): ViewModel() {
 
+    private val _response = MutableLiveData<List<WheatherInfo>>(listOf())
+    //val response : LiveData<List<WheatherInfo>> = _response
+    fun getResponse():LiveData<List<WheatherInfo>> = _response
     fun getWeather(latitude:Int,longitude:Int){
         weatherUsesCases.getWeather(latitude,longitude).onEach {result->
             if(result?.cod == "200"){
@@ -35,6 +38,7 @@ class HomeViewModel: ViewModel() {
                 _response.postValue(list)
             }
             else{
+                //hay que mockear los Log para que funcionen bien los test
                 Log.d("Error de servicio","Error")
             }
 

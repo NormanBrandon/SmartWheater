@@ -12,7 +12,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "scryfall_url", "\"https://api.scryfall.com/cards/\""
+        buildConfigField "String", "URL_Services", "\"https://api.openweathermap.org/data/2.5/\""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
                 binding.rvHome.visibility = View.VISIBLE
                 networkConnection.removeObservers(viewLifecycleOwner)
                 viewModel.getWeather(latitude, longitude)
-                viewModel.response.observe(viewLifecycleOwner){
+                viewModel.getResponse().observe(viewLifecycleOwner){
                     adapter = RvHomeAdapter(it)
                     binding.rvHome.layoutManager = LinearLayoutManager(requireContext(),VERTICAL, false)
                     binding.rvHome.adapter = adapter
