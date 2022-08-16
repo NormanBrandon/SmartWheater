@@ -72,4 +72,33 @@ class HomeViewModelTest{
             }
         }
     }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun check_getWeather_responseSizeIs6() {
+
+        val latitude = 19
+        val longitude = -99
+        runBlocking {
+            val observer = Observer<List<WheatherInfo>>{}
+            val response = JSONFileLoader().loadWeatherForecastResponse("getWeatherSuccessResponse")
+            println(response)
+            val outputRepository = flow {
+                delay(10)
+                emit(response)
+            }
+            Mockito.`when`(usesCases.getWeather(latitude,longitude)).thenReturn(outputRepository)
+
+            try {
+                homeViewModel.getResponse().observeForever(observer)
+                homeViewModel.getWeather(latitude, longitude)
+                val result = homeViewModel.getResponse().getOrAwaitValue {  }
+                println(result)
+                assertThat(result.size, `is`(6))
+            }
+            finally {
+                homeViewModel.getResponse().removeObserver(observer)
+            }
+        }
+    }
 }

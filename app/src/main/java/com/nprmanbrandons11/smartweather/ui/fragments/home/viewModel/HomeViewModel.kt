@@ -21,6 +21,7 @@ class HomeViewModel(
     fun getResponse():LiveData<List<WheatherInfo>> = _response
     fun getWeather(latitude:Int,longitude:Int){
         weatherUsesCases.getWeather(latitude,longitude).onEach {result->
+            println(result)
             if(result?.cod == "200"){
                 val list: MutableList<WheatherInfo> = mutableListOf()
                 for (i in 0 .. 6){

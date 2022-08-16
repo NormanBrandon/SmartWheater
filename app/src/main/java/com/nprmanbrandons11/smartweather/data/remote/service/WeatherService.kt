@@ -9,9 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-class WeatherService(private val dispatcher: CoroutineDispatcher = Dispatchers.Default) {
-    private val retrofit = Retrofit.getRetrofit()
-    private val client = retrofit.create(WeatherApi::class.java)
+class WeatherService(
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Default,
+    private val client: WeatherApi = Retrofit.getRetrofit().create(WeatherApi::class.java)
+) {
 
     suspend fun getWeather(latitude:Int,longitude:Int):WeatherResponse?{
         return withContext(dispatcher) {
