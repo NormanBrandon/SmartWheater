@@ -27,7 +27,7 @@ import com.nprmanbrandons11.smartweather.ui.fragments.home.viewModel.HomeViewMod
 import com.nprmanbrandons11.smartweather.utils.NetworkUtils
 import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(){
 
     private lateinit var binding:FragmentHomeBinding
     private lateinit var adapter: RvHomeAdapter

@@ -5,7 +5,6 @@ import com.nprmanbrandons11.smartweather.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers
 import org.hamcrest.Matchers.*
 
 import org.junit.Before
@@ -51,6 +50,13 @@ class WeatherServiceTest{
         runBlocking {
             val result = service.getWeather(19,-99)
             assertThat(result.body()?.cod,`is`("200"))
+        }
+    }
+    @Test
+    fun checkCurrentWeatherListIsNotEmpty(){
+        runBlocking {
+            val result = service.getWeather(19,-99)
+            assertThat(result.body()?.list.isNullOrEmpty(),`is`(false))
         }
     }
 }

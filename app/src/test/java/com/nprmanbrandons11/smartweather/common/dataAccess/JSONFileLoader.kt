@@ -16,4 +16,5 @@ class JSONFileLoader {
         jsonStr = loader.readText()
         return Gson().fromJson(jsonStr,WeatherResponse::class.java)
     }
+
 }
